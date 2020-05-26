@@ -50,7 +50,9 @@ public class StepDefinition {
 	@Then("^agiletestware should be mentioned in the results$")
 	public void displayResults() {
 		final String agileTitle = webDriver.findElement(By.xpath("//a[@href='https://www.agiletestware.com/']")).getText();
-		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
+//		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
+		assertEquals("Some Wrong Title", agileTitle);
+
 	}
 
 	@After
