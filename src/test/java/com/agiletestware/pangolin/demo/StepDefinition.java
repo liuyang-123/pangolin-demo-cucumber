@@ -3,6 +3,7 @@ package com.agiletestware.pangolin.demo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import cucumber.api.java.AfterStep;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -55,11 +56,15 @@ public class StepDefinition {
 
 	}
 
-	@After
-	public void afterScenario(final Scenario scenario) {
+	@AfterStep
+	public void afterStep(final Scenario scenario){
 		if (scenario.isFailed()) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
 		}
+	}
+
+	@After
+	public void afterScenario(final Scenario scenario) {
 		if (webDriver != null) {
 			webDriver.close();
 			webDriver.quit();
