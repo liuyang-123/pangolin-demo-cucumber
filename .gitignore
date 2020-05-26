@@ -1,0 +1,7 @@
+/target/
+/.settings/
+/.classpath
+/.project
+/pangolin.log
+/.idea/
+/*.iml
