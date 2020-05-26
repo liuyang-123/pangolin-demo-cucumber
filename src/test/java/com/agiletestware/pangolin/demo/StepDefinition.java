@@ -16,6 +16,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class StepDefinition {
 
@@ -25,7 +26,11 @@ public class StepDefinition {
 	@Given("^I have gone to the Google page$")
 	public void goToTheGooglePage() {
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		webDriver = new ChromeDriver();
+
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+
+		webDriver = new ChromeDriver(options);
 		webDriver.manage().window().maximize();
 		webDriver.get(GOOGLE_URL);
 	}
@@ -39,13 +44,13 @@ public class StepDefinition {
 
 	@And("^click the Search Button$")
 	public void clickSearch() {
-		webDriver.findElement(By.name("btnK")).click();
+		webDriver.findElement(By.name("btnK")).submit();
 	}
 
 	@Then("^agiletestware should be mentioned in the results$")
 	public void displayResults() {
 		final String agileTitle = webDriver.findElement(By.className("LC20lb")).getText();
-		assertEquals("some wrong title", agileTitle);
+		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
 	}
 
 	@After
