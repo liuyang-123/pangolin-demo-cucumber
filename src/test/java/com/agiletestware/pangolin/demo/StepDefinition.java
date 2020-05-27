@@ -61,13 +61,13 @@ public class StepDefinition {
 		assertEquals("Some Wrong Title", agileTitle);
 	}
 
-	@AfterStep
+/*	@AfterStep
 	public void afterStep(final Scenario scenario){
 		if (scenario.isFailed()) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
 			fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
 		}
-	}
+	}*/
 
 	@After
 	public void afterScenario(final Scenario scenario) {
@@ -75,5 +75,10 @@ public class StepDefinition {
 			webDriver.close();
 			webDriver.quit();
 		}
+
+        if (scenario.isFailed()) {
+            scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
+            fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
+        }
 	}
 }
