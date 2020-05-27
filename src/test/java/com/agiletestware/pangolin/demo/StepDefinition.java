@@ -2,6 +2,7 @@ package com.agiletestware.pangolin.demo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import cucumber.api.java.AfterStep;
 import org.openqa.selenium.By;
@@ -19,7 +20,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.Locale;
+
 public class StepDefinition {
+	static{
+		Locale.setDefault(Locale.US);
+	}
 
 	public static WebDriver webDriver = null;
 	public static final String GOOGLE_URL = "http://www.bing.com";
@@ -53,13 +59,13 @@ public class StepDefinition {
 		final String agileTitle = webDriver.findElement(By.xpath("//a[@href='https://www.agiletestware.com/']")).getText();
 //		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
 		assertEquals("Some Wrong Title", agileTitle);
-
 	}
 
 	@AfterStep
 	public void afterStep(final Scenario scenario){
 		if (scenario.isFailed()) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
+			fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
 		}
 	}
 
