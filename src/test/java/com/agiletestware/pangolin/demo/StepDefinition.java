@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import cucumber.api.java.AfterStep;
+import cucumber.api.java.BeforeStep;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -61,20 +62,25 @@ public class StepDefinition {
 		assertEquals("Some Wrong Title", agileTitle);
 	}
 
-/*	@AfterStep
+    @BeforeStep
+    public void beforeStep(final Scenario scenario){
+	    // do nothing
+    }
+
+	@AfterStep
 	public void afterStep(final Scenario scenario){
 		if (scenario.isFailed()) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
 			fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
 		}
-	}*/
+	}
 
 	@After
 	public void afterScenario(final Scenario scenario) {
-		if (scenario.isFailed()) {
-			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
-			fail("There ars failed steps, so the failure is raised for uploading screenshot via pangolin.");
-		}
+//		if (scenario.isFailed()) {
+//			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
+//			fail("There ars failed steps, so the failure is raised for uploading screenshot via pangolin.");
+//		}
 
 		if (webDriver != null) {
 			webDriver.close();
