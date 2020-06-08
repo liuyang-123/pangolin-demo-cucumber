@@ -77,10 +77,10 @@ public class StepDefinition {
 
 	@After
 	public void afterScenario(final Scenario scenario) {
-		if (scenario.isFailed()) {
-			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
-			fail("There ars failed steps, so the failure is raised for uploading screenshot via pangolin.");
-		}
+//		if (scenario.isFailed()) {
+//			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
+//			fail("There ars failed steps, so the failure is raised for uploading screenshot via pangolin.");
+//		}
 
 		if (webDriver != null) {
 			webDriver.close();
