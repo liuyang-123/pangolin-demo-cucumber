@@ -64,7 +64,7 @@ public class StepDefinition {
 
     @BeforeStep
     public void beforeStep(final Scenario scenario){
-	    // do nothing
+	    fail("Test for before step");
     }
 
 	@AfterStep
