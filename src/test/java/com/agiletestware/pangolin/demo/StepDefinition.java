@@ -58,8 +58,8 @@ public class StepDefinition {
 	@Then("^agiletestware should be mentioned in the results$")
 	public void displayResults() {
 		final String agileTitle = webDriver.findElement(By.xpath("//a[@href='https://www.agiletestware.com/']")).getText();
-//		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
-		assertEquals("Some Wrong Title", agileTitle);
+		assertEquals("Agiletestware - Software for QA and Development Tools", agileTitle);
+//		assertEquals("Some Wrong Title", agileTitle);
 	}
 
     @BeforeStep
@@ -69,7 +69,7 @@ public class StepDefinition {
 
 	@AfterStep
 	public void afterStep(final Scenario scenario){
-		if (scenario.isFailed()) {
+		if (scenario.getName().equals("agiletestware should be mentioned in the results")) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
 			fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
 		}
