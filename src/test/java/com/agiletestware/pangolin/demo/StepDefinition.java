@@ -31,6 +31,8 @@ public class StepDefinition {
 	public static WebDriver webDriver = null;
 	public static final String GOOGLE_URL = "http://www.bing.com";
 
+	private int currentStepDefIndex = 0;
+
 	@Given("^I have gone to the Google page$")
 	public void goToTheGooglePage() {
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -69,10 +71,12 @@ public class StepDefinition {
 
 	@AfterStep
 	public void afterStep(final Scenario scenario){
-		if (scenario.getName().equals("agiletestware should be mentioned in the results")) {
+		if (currentStepDefIndex==3) {
 			scenario.embed(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES), "image/png");
 			fail("The step failed, So the 'after' step should be failure also so that we can upload screenshot.");
 		}
+
+		currentStepDefIndex ++;
 	}
 
 	@After
